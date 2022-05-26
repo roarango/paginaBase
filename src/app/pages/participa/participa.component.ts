@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+declare var $: any;
 
 @Component({
   selector: 'app-participa',
@@ -8,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParticipaComponent implements OnInit {
 
-  constructor() { }
+  recibe: any;
+
+  constructor( private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+
+  recibeData(respuesta: any){
+    this.recibe = respuesta;
+    console.log(this.recibe);
+    if(this.recibe=='ok'){
+      $('#modalFileUpload').modal('hide');
+      this.router.navigateByUrl('/gracias-participacion');
+    }
+    
   }
 
 }
