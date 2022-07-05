@@ -128,43 +128,166 @@
             <!-- Registro form -->
             <div class="col-md-6 p-2">
                 <h2>Registro</h2>
-                <form class="row g-3">
+                <form [formGroup]="registroForm" (ngSubmit)="registrousr()">
                     <div class="col-md-12">
-                        <label for="inputEmail4" class="form-label">Email</label>
-                        <input type="email" class="form-control is-invalid" id="inputEmail4" >
-                    </div>
-                    <div class="col-md-12">
-                        <label for="inputPassword4" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="inputPassword4">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputAddress" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                    </div>
-                    <div class="col-12">
-                        <label for="inputAddress2" class="form-label">Address 2</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="inputCity" class="form-label">City</label>
-                        <input type="text" class="form-control" id="inputCity">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="inputState" class="form-label">State</label>
-                        <select id="inputState" class="form-select">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
+                        <label for="" class="form-label">Nombre completo</label>
+                        <input type="text" 
+                        required 
+                        name="nombreregistro" 
+                        formControlName="nombreregistro" 
+                        class="form-control"
+                        [class.is-invalid]="registroForm.get('nombreregistro')?.invalid && registroForm.get('nombreregistro')?.touched"
+                        [class.is-valid]="registroForm.get('nombreregistro')?.valid && registroForm.get('nombreregistro')?.touched"
+                        >
+                        <span class="text-danger" *ngIf="isSubmitReg && registroForm.get('nombreregistro')?.invalid">Este campo es requerido y solo se aceptan letras mínimo de caracteres (3).</span>
                     </div>
 
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">
-                                Check me out
-                            </label>
-                        </div>
+                    <div class="col-md-12">
+                        <label for="" class="form-label">Dirección</label>
+                        <input type="text"                       
+                        required 
+                        name="direccionregistro" 
+                        formControlName="direccionregistro" 
+                        class="form-control"
+                        [class.is-invalid]="registroForm.get('direccionregistro')?.invalid && registroForm.get('direccionregistro')?.touched"
+                        [class.is-valid]="registroForm.get('direccionregistro')?.valid && registroForm.get('direccionregistro')?.touched"
+                        >
+                        <span class="text-danger" *ngIf="isSubmitReg && registroForm.get('direccionregistro')?.invalid">Este campo es requerido y solo aceptan un mínimo de caracteres (3).</span>
                     </div>
+
+                    <div class="col-md-12">
+                        <label for="" class="form-label">Estado</label>
+                        <select
+                            required 
+                            name="estadoregistro" 
+                            formControlName="estadoregistro" 
+                            class="form-select"
+                            [class.is-invalid]="registroForm.get('estadoregistro')?.invalid && registroForm.get('estadoregistro')?.touched"
+                            [class.is-valid]="registroForm.get('estadoregistro')?.valid && registroForm.get('estadoregistro')?.touched"
+                            
+                            >
+                            <option value="0" selected>Seleccione un estado</option>
+                            <option value="Aguascalientes">Aguascalientes</option>
+                            <option value="Baja California">Baja California</option>
+                            <option value="Baja California Sur">Baja California Sur</option>
+                            <option value="Campeche">Campeche</option>
+                            <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+                            <option value="Colima">Colima</option>
+                            <option value="Chiapas">Chiapas</option>
+                            <option value="Chihuahua">Chihuahua</option>
+                            <option value="Ciudad de México">Ciudad de México</option>
+                            <option value="Durango">Durango</option>
+                            <option value="Guanajuato">Guanajuato</option>
+                            <option value="Guerrero">Guerrero</option>
+                            <option value="Hidalgo">Hidalgo</option>
+                            <option value="Jalisco">Jalisco</option>
+                            <option value="México">México</option>
+                            <option value="Michoacán de Ocampo">Michoacán de Ocampo</option>
+                            <option value="Morelos">Morelos</option>
+                            <option value="Nayarit">Nayarit</option>
+                            <option value="Nuevo León">Nuevo León</option>
+                            <option value="Oaxaca">Oaxaca</option>
+                            <option value="Puebla">Puebla</option>
+                            <option value="Querétaro">Querétaro</option>
+                            <option value="Quintana Roo">Quintana Roo</option>
+                            <option value="San Luis Potosí">San Luis Potosí</option>
+                            <option value="Sinaloa">Sinaloa</option>
+                            <option value="Sonora">Sonora</option>
+                            <option value="Tabasco">Tabasco</option>
+                            <option value="Tamaulipas">Tamaulipas</option>
+                            <option value="Tlaxcala">Tlaxcala</option>
+                            <option value="Veracruz">Veracruz</option>
+                            <option value="Yucatán">Yucatán</option>
+                            <option value="Zacatecas">Zacatecas</option>
+                        </select>
+                        <span class="text-danger" *ngIf="isSubmitReg && registroForm.get('estadoregistro')?.invalid">Debe seleccionar un estado.</span>
+
+                    </div>
+                    
+
+                    <div class="col-md-12">
+                        <label for="" class="form-label">Correo electrónico</label>
+                        <!-- <input type="email" class="form-control" id="inputEmail4" > -->
+                        <input type="email"
+                        required 
+                        name="emailregistro" 
+                        formControlName="emailregistro" 
+                        class="form-control"
+                        [class.is-invalid]="registroForm.get('emailregistro')?.invalid && registroForm.get('emailregistro')?.touched"
+                        [class.is-valid]="registroForm.get('emailregistro')?.valid && registroForm.get('emailregistro')?.touched"
+                        >
+                        <span class="text-danger" *ngIf="isSubmitReg && registroForm.get('emailregistro')?.invalid">Debe proporcionar una cuenta de correo válida.</span>
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="" class="form-label">Contraseña</label>
+                        <!-- <input type="password" class="form-control" id="inputPassword4"> -->
+                        <input type="password" 
+                        required 
+                        name="passwordregistro" 
+                        formControlName="passwordregistro" 
+                        class="form-control"
+                        [class.is-invalid]="registroForm.get('passwordregistro')?.invalid && registroForm.get('passwordregistro')?.touched"
+                        [class.is-valid]="registroForm.get('passwordregistro')?.valid && registroForm.get('passwordregistro')?.touched"
+                        >
+                        <span class="text-danger" *ngIf="isSubmitReg && registroForm.get('passwordregistro')?.invalid">Este campo es requerido y solo se aceptan mínimo de caracteres (5).</span>
+                        <!-- <img class="password-eye" src="assets/images/show.png" title="Mostrar Contraseña" > -->
+
+
+                    </div>
+
+
+                    <div class="col-12">
+                        <label for="" class="form-label">Teléfono</label>
+                        <input type="tel"
+                        required 
+                        name="telefonoregistro" 
+                        formControlName="telefonoregistro" 
+                        class="form-control"
+                        [class.is-invalid]="registroForm.get('telefonoregistro')?.invalid && registroForm.get('telefonoregistro')?.touched"
+                        [class.is-valid]="registroForm.get('telefonoregistro')?.valid && registroForm.get('telefonoregistro')?.touched"
+                        maxlength="10"
+                        >
+                        <span class="text-danger" *ngIf="isSubmitReg && registroForm.get('telefonoregistro')?.invalid">Este campo es requerido y solo se aceptan números. mínimo 10 caracteres.</span>
+                        
+                    </div>
+
+
+
+                    <div class="col-md-12">
+                        <label for="" class="form-label">Edad</label>
+                        <input type="tel"
+                        required 
+                        name="edadregistro" 
+                        formControlName="edadregistro" 
+                        class="form-control"
+                        [class.is-invalid]="registroForm.get('edadregistro')?.invalid && registroForm.get('edadregistro')?.touched"
+                        [class.is-valid]="registroForm.get('edadregistro')?.valid && registroForm.get('edadregistro')?.touched"
+                        >
+                        <span class="text-danger" *ngIf="isSubmitReg && registroForm.get('edadregistro')?.invalid">Este campo es requerido y solo se aceptan números (2).</span>
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <!-- <div class="input-checkbox"> -->
+                            <input type="checkbox"
+                                required 
+                                name="terminos" 
+                                id="terminos" 
+                                formControlName="terminos" 
+                                class="form-control"
+                                [class.is-invalid]="registroForm.get('terminos')?.invalid && registroForm.get('terminos')?.touched"
+                                [class.is-valid]="registroForm.get('terminos')?.valid && registroForm.get('terminos')?.touched"
+                            >
+                            <p>Leí y estoy de acuerdo en los 
+                                <span data-bs-toggle="modal" data-bs-target="#Terminos">Términos y Condiciones</span> de esta promoción.<br>
+                                <span class="text-danger" *ngIf="isSubmitReg && registroForm.get('terminos')?.invalid " >
+                                Este campo es requerido.
+                                </span></p> 
+                        <!-- </div> -->
+                    </div>
+
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Sign in</button>
                     </div>
